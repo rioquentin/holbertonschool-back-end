@@ -1,16 +1,21 @@
 #!/usr/bin/python3
+"""
+Module to fetch and parse data from jsonplaceholder website
+"""
+
 
 import requests
 import json
 import sys
 
+#to get the user id
+
 id = sys.argv[1]
-print(id)
+
+#to fetch all the data we want from /todos and /users
 
 users_todos = requests.get('https://jsonplaceholder.typicode.com/todos')
 users_names = requests.get('https://jsonplaceholder.typicode.com/users')
-
-#print(api_response.status_code)
 
 todos_data = users_todos.text
 users_data = users_names.text
