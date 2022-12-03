@@ -1,12 +1,12 @@
 #!/usr/bin/python3
+import requests
+import json
+import sys
+
 """
 Module to fetch and parse data from jsonplaceholder website
 """
 
-
-import requests
-import json
-import sys
 
 #to get the user id
 
@@ -17,12 +17,17 @@ id = sys.argv[1]
 users_todos = requests.get('https://jsonplaceholder.typicode.com/todos')
 users_names = requests.get('https://jsonplaceholder.typicode.com/users')
 
+#to use the data we just fetched
+
 todos_data = users_todos.text
 users_data = users_names.text
+
+#to transform this data into python object
 
 parse_todos = json.loads(todos_data)
 parse_users = json.loads(users_data)
 
+#to get the user's data we want from his id
 
 tasks = []
 username = None
@@ -34,7 +39,9 @@ for key in parse_users:
 for item in parse_todos:
     if item['userId'] == int(id):
         tasks.append(item)
-        
+
+#to get the tasks data
+      
 tasks_done = 0
 completed_tasks =[]
 tasks_left = 0
@@ -50,6 +57,7 @@ for i in tasks:
         
 all_tasks = tasks_left + tasks_done
 
+#to print teh data we just parsed
 
 print ("Employee {} is done with tasks ({}/{}):".format(username, tasks_done, all_tasks))
 for i in completed_tasks:
